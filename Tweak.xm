@@ -1,6 +1,7 @@
 #import "SwitcherLoader.h"
 #import <SpringBoard5.0/SBAppSwitcherBarView.h>
 #include <dlfcn.h>
+BOOL firstLoaded = YES;
 SwitcherLoader *switcherLoader;
 %hook SBAppSwitcherBarView
 - (void)addAuxiliaryViews:(NSArray *)arg1 {
@@ -20,10 +21,11 @@ SwitcherLoader *switcherLoader;
     [switcherLoader setStatus:Normal];
   
     %orig(plugins);
+    firstLoaded = YES;
 }
 
 - (void)viewWillAppear {
-  if(switcherLoader.currentStatus == Update)
+  if(switcherLoader.currentStatus == Update && !firstLoaded)
     [self addAuxiliaryViews:nil];
     %orig;
     
