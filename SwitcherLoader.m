@@ -60,7 +60,6 @@ static BOOL hasLoadedPlugins = NO;
     
 }
 -(void)loadItems {
-    NSLog(@"Loading plugins!!!!!!");
     if(!hasLoadedPlugins) {
     [plugins removeAllObjects];
     [identifiers removeAllObjects];
@@ -78,7 +77,7 @@ static BOOL hasLoadedPlugins = NO;
             
             [bundle loadAndReturnError:&error];
             if(!error) {
-                UIView *view = [[[bundle principalClass] alloc]initWithFrame:CGRectMake(0,0,320,94)];
+                UIView *view = [[[bundle principalClass] alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width,95)];
             [identifiers addObject:[bundle bundleIdentifier]];
             view.tag = [plugins count];
 
@@ -90,6 +89,7 @@ static BOOL hasLoadedPlugins = NO;
         }
     }
     [identifiers addObject:@"springboard.sbnowplayingbarview"];
+        if ([UIDevice currentDevice].userInterfaceIdiom !=UIUserInterfaceIdiomPad)
     [identifiers addObject:@"springboard.sbairplaybarview"];
    
 

@@ -21,7 +21,7 @@ SwitcherLoader *switcherLoader;
     [switcherLoader setStatus:Normal];
   
     %orig(plugins);
-    firstLoaded = YES;
+    firstLoaded = NO;
 }
 
 - (void)viewWillAppear {

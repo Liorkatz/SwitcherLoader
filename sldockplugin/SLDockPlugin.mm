@@ -8,13 +8,12 @@
 
 
 @interface SLDockPlugin_view : UIView<SBIconViewDelegate> {
-    
+    UIView *conView;
 }
 @end
 @implementation SLDockPlugin_view
 -(id)initWithFrame:(CGRect)frame {
     if((self = [super initWithFrame:frame])) {
-
     }
     return self;
 }
@@ -38,10 +37,8 @@
             SBIconView *view = [[objc_getClass("SBIconView") alloc]initWithDefaultSize];
             [view setIcon:sbicon];
             view.delegate = self;
-            NSLog(@"view1");
-
-        view.center = CGPointMake(i*(self.frame.size.width/4)+ (view.frame.size.width/1.5), self.center.y + 5);
-            NSLog(@"View2");
+            
+        view.center = CGPointMake((self.frame.size.width/4) * i + (self.frame.size.width/8), self.center.y + 5);
         [self addSubview:view];
     }    
     [icondict release];
