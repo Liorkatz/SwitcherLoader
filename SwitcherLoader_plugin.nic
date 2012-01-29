@@ -34,9 +34,10 @@ file 32 Resources/Info.plist
     <string>@@PROJECTNAME.png</string>
 </dict>
 </plist>
-file 15 @@PROJECTNAME@@.mm
+file 22 @@PROJECTNAME@@.mm
 @interface @@PROJECTNAME@@_view : UIView
-
+-(void)viewWillAppear;
+-(void)viewWillDisappear;
 @end
 @implementation @@PROJECTNAME@@_view
 -(id)initWithFrame:(CGRect)frame {
@@ -47,7 +48,13 @@ self.backgroundColor = [UIColor redColor];
 return self;
 }
 -(void)layoutSubviews {
-//Add any subviews
+//set any frames
+}
+-(void)viewWillAppear {
+// allocate and add subviews
+}
+-(void)viewWillDisappear {
+// release and remove subviews
 }
 @end
 file 7 Makefile

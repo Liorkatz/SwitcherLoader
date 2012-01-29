@@ -10,6 +10,8 @@
 @interface SLDockPlugin_view : UIView<SBIconViewDelegate> {
     UIView *conView;
 }
+-(void)viewWillAppear;
+-(void)viewWillDisappear;
 @end
 @implementation SLDockPlugin_view
 -(id)initWithFrame:(CGRect)frame {
@@ -19,33 +21,43 @@
 }
 
 -(void)layoutSubviews {
-    for (UIView *view in self.subviews) {
-        [view removeFromSuperview];
-        [view release];
-    }
+
+   
+}
+
+-(void)viewWillAppear {
     NSDictionary *dict = [[NSDictionary alloc]initWithContentsOfFile:@"/var/mobile/Library/SpringBoard/IconState.plist"];
     
     NSArray *icondict = [[NSArray alloc]initWithArray:[dict objectForKey:@"buttonBar"]];
-    
-
-    
     UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(0,self.frame.size.height/2,self.frame.size.width,self.frame.size.height/2)];
     background.image = [objc_getClass("SBDockIconListView") backgroundImageForOrientation:1];
     [self addSubview:background];
-        for (unsigned int i = 0; i < [icondict count]; i++) {
-            SBIcon *sbicon = [[objc_getClass("SBIconModel") sharedInstance] applicationIconForDisplayIdentifier:[icondict objectAtIndex:i]];
-            SBIconView *view = [[objc_getClass("SBIconView") alloc]initWithDefaultSize];
-            [view setIcon:sbicon];
-            view.delegate = self;
-            
+    for (unsigned int i = 0; i < [icondict count]; i++) {
+        SBIcon *sbicon = [[objc_getClass("SBIconModel") sharedInstance] applicationIconForDisplayIdentifier:[icondict objectAtIndex:i]];
+        SBIconView *view = [[objc_getClass("SBIconView") alloc]initWithDefaultSize];
         view.center = CGPointMake((self.frame.size.width/4) * i + (self.frame.size.width/8), self.center.y + 5);
+
+        view.tag = i;
+        NSLog(@"View did appear");
+        [view setIcon:sbicon];
+        view.delegate = self;
+        
         [self addSubview:view];
     }    
     [icondict release];
     [dict release];
+    
 }
+-(void)viewWillDisappear {
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+        [view release];
+        view = nil;
+        
+    }
+    NSLog(@"View did dis");
 
-
+}
 - (BOOL)iconAllowJitter:(SBIconView *)arg1 {
     
     return YES;
