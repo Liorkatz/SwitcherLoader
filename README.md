@@ -8,7 +8,7 @@ NSBundles
 --------
 * SwitcherLoader loads your view from a bundle from /Library/SwitcherLoader/Plugins
 * Must be a valid NSBundle
-* The NSPricipalClass must be a subclass of a UIView
+* The NSPrincipalClass must be a subclass of a UIView
 * The bundle identifier must be set
 * Custom names and icons can be loaded by setting the name key and the icon key, icon must be in bundle
 * SwitcherLoader does check the MinimumOSVersion key in the bundle's plist, if you want any system version leave it blank
