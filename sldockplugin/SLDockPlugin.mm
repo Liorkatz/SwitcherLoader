@@ -21,7 +21,11 @@
 }
 
 -(void)layoutSubviews {
-
+    for(SBIconView *view in self.subviews) {
+        if([view  isKindOfClass:NSClassFromString(@"SBIconView")])
+            view.center = CGPointMake((self.frame.size.width/4) * view.tag + (self.frame.size.width/8), self.center.y + 5);
+        
+    }
    
 }
 
@@ -35,10 +39,8 @@
     for (unsigned int i = 0; i < [icondict count]; i++) {
         SBIcon *sbicon = [[objc_getClass("SBIconModel") sharedInstance] applicationIconForDisplayIdentifier:[icondict objectAtIndex:i]];
         SBIconView *view = [[objc_getClass("SBIconView") alloc]initWithDefaultSize];
-        view.center = CGPointMake((self.frame.size.width/4) * i + (self.frame.size.width/8), self.center.y + 5);
 
         view.tag = i;
-        NSLog(@"View did appear");
         [view setIcon:sbicon];
         view.delegate = self;
         
@@ -55,7 +57,6 @@
         view = nil;
         
     }
-    NSLog(@"View did dis");
 
 }
 - (BOOL)iconAllowJitter:(SBIconView *)arg1 {
