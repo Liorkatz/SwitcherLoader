@@ -16,7 +16,6 @@ NSBundles
 UIView
 --------
 * SwitcherLoader calls upon the initWithFrame: method, giving the view the frame of of the AppSwitchers height and width
-* Currently there is no support for viewDidAppear and viewDidDisappear methods
 
 ________
 * You can easily start a plugin by using this theos nic template: [https://github.com/Fr0zenSun/SwitcherLoader/blob/master/SwitcherLoader_plugin.nic](https://github.com/Fr0zenSun/SwitcherLoader/blob/master/SwitcherLoader_plugin.nic "github/")
